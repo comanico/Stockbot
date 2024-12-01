@@ -1,0 +1,23 @@
+{
+  "resources": [
+    {
+      "name": "default-role",
+      "resource_type": "iam_role",
+      "role_arn": "arn:aws:iam::552708696437:role/tradingview-webhook-alerts-dev",
+      "role_name": "tradingview-webhook-alerts-dev"
+    },
+    {
+      "name": "api_handler",
+      "resource_type": "lambda_function",
+      "lambda_arn": "arn:aws:lambda:us-east-1:552708696437:function:tradingview-webhook-alerts-dev"
+    },
+    {
+      "name": "rest_api",
+      "resource_type": "rest_api",
+      "rest_api_id": "wlvvh3xsy2",
+      "rest_api_url": "https://wlvvh3xsy2.execute-api.us-east-1.amazonaws.com/api/"
+    }
+  ],
+  "schema_version": "2.0",
+  "backend": "api"
+}
