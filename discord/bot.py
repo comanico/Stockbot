@@ -1,7 +1,8 @@
-import discord
-from discord.ext import commands
 import os
+import discord
+import requests
 from dotenv import load_dotenv
+from discord.ext import commands
 
 # Load environment variables from .env file
 load_dotenv()
@@ -30,6 +31,14 @@ async def hello(ctx):
     """Command that makes the bot say hello."""
     await ctx.send('Hello! I am a bot!')
 
+def send_message(message, webhook_url):
+    """Function to send a message to a channel."""
+    data = {"content": message}
+    response = requests.post(webhook_url, json=data)
+    if response.status_code != 204:
+        print(f"Failed to send message: {response.text}")
+    
+
 @bot.event
 async def on_message(message):
     """Event handler for messages. Checks if the bot was mentioned."""
@@ -38,4 +47,5 @@ async def on_message(message):
     await bot.process_commands(message)  # This line is crucial for commands to work
 
 # Run the bot with the token
-bot.run(TOKEN)
+def run_bot():
+    bot.run(TOKEN)

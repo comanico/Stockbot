@@ -1,0 +1,9 @@
+{
+  "ticker": ["INTC"],
+  "starting_price": [30],
+  "closing_price": [24.05],
+  "profit": [-6.85],
+  "profit_percentage": [-22.8333],
+  "stop": [31],
+  "message": ["Buy"]
+}

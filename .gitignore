@@ -1,0 +1,4 @@
+.env
+.venv/
+StockBot_output.txt
+__pycache__/

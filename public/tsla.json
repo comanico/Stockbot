@@ -1,0 +1,9 @@
+{
+  "ticker": ["TSLA"],
+  "starting_price": [231.26],
+  "closing_price": [345.16],
+  "profit": [106.9622],
+  "profit_percentage": [46.2519],
+  "stop": [232.26],
+  "message": ["Do Not Buy/Sell Stock"]
+}

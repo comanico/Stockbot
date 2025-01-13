@@ -1,0 +1,9 @@
+{
+  "ticker": ["CCJ"],
+  "starting_price": [55.78],
+  "closing_price": [59.45],
+  "profit": [1.9966],
+  "profit_percentage": [3.5794],
+  "stop": [56.78],
+  "message": ["Sell"]
+}

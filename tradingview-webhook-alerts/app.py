@@ -14,7 +14,6 @@ HEADERS = {'APCA-API-KEY-ID': API_KEY, 'APCA-API-SECRET-KEY': SECRET_KEY}
 def index():
     return {'hello': 'world'}
 
-
 @app.route('/buy_stock', methods=['POST'])
 def buy_stock():
     request = app.current_request
