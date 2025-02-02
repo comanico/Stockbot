@@ -1,9 +1,0 @@
-{
-  "ticker": ["VOW3.DE"],
-  "starting_price": [81.86],
-  "closing_price": [80.72],
-  "profit": [-3.5958],
-  "profit_percentage": [-4.3926],
-  "stop": [82.86],
-  "message": ["Do Not Buy/Sell Stock"]
-}

@@ -1,9 +1,0 @@
-{
-  "ticker": ["PLTR"],
-  "starting_price": [51.13],
-  "closing_price": [67.08],
-  "profit": [14.4161],
-  "profit_percentage": [28.195],
-  "stop": [52.13],
-  "message": ["Hold Stock"]
-}

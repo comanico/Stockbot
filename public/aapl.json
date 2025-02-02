@@ -1,9 +1,0 @@
-{
-  "ticker": ["AAPL"],
-  "starting_price": [234.4],
-  "closing_price": [237.33],
-  "profit": [-4.102],
-  "profit_percentage": [-1.75],
-  "stop": [235.4],
-  "message": ["Buy"]
-}

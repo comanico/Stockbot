@@ -1,4 +1,12 @@
 # Load required packages
+if (!require("quantmod")) install.packages("quantmod")
+if (!require("dplyr")) install.packages("dplyr")
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("jsonlite")) install.packages("jsonlite")  # For JSON output
+if (!require("knitr")) install.packages("knitr")        # For kable
+if (!require("devtools")) install.packages("devtools")
+if (!require("psymonitor")) devtools::install_github("itamarcaspi/psymonitor")
+
 require("quantmod")
 require("dplyr")
 require("psymonitor")
@@ -14,7 +22,7 @@ for (s in tickers) {
   cat("\n\nProcessing:", s, "\n")
   tryCatch({
     # Get closing prices from Yahoo Finance
-    p <- getSymbols(s, src = 'yahoo', auto.assign = FALSE, from = '2023-01-01', to = '2025-01-12')
+    p <- getSymbols(s, src = 'yahoo', auto.assign = FALSE, from = '2023-01-01', to = Sys.Date())
     
     # Extract closing prices
     closing_price_column <- paste0(s, ".Close")  # Dynamically generate the column name
@@ -83,11 +91,11 @@ for (s in tickers) {
     today_bubble_status <- ind95[length(ind95)]
     
     if (previous_day_bubble_status == 1 && today_bubble_status == 1) {
-      recommendation <- "Hold Stock"
+      recommendation <- "Hold"
     } else if (previous_day_bubble_status == 1 && today_bubble_status == 0) {
-      recommendation <- "Sell Stock"
+      recommendation <- "Sell"
     } else if (previous_day_bubble_status == 0 && today_bubble_status == 1) {
-      recommendation <- "Buy Stock"
+      recommendation <- "Buy"
     } else {
       recommendation <- "Do Not Buy/Sell Stock"
     }
@@ -124,12 +132,13 @@ for (s in tickers) {
   }, error = function(e) {
     cat("Error processing", s, ":", e$message, "\n")
   })
-}
 
-if (length(result) == 0) {
-  cat("No valid results were generated. JSON file will not be created.\n")
-} else {
-  output_file <- "C:\\Users\\Raul's Ally\\Desktop\\Investo_Bot.json"  # Adjusted file path
-  write_json(result, output_file, pretty = TRUE)
-  cat("\nAll result have been saved to:", output_file, "\n")
+  if (length(result) == 0) {
+    cat("No valid results were generated. JSON file will not be created.\n")
+  } else {
+    output_file <- paste0("D:\\Git\\StockBot\\public\\", s, ".json")  # Adjusted file path
+    write_json(result, output_file, pretty = TRUE)
+    cat("\nAll result have been saved to:", output_file, "\n")
+    result <- NULL
+  }
 }

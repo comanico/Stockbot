@@ -1,9 +1,0 @@
-{
-  "ticker": ["NVDA"],
-  "starting_price": [103.799],
-  "closing_price": [138.25],
-  "profit": [31.337],
-  "profit_percentage": [30.1901],
-  "stop": [104.799],
-  "message": ["Sell"]
-}

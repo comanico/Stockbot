@@ -2,3 +2,5 @@
 .venv/
 StockBot_output.txt
 __pycache__/
+public/*
+.vscode/
