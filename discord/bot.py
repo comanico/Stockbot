@@ -38,6 +38,9 @@ def send_message(message, webhook_url):
     if response.status_code != 204:
         print(f"Failed to send message: {response.text}")
     
+@bot.command(name='check')
+async def check(ctx, ticker):
+    await ctx.send(f'Checking stock price for {ticker}...')
 
 @bot.event
 async def on_message(message):
@@ -49,3 +52,6 @@ async def on_message(message):
 # Run the bot with the token
 def run_bot():
     bot.run(TOKEN)
+
+if __name__ == '__main__':
+    run_bot()

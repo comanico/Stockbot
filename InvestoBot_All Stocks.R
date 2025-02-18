@@ -15,7 +15,13 @@ require("jsonlite")  # For JSON output
 require("knitr")     # For kable
 
 # Define the vector of stock tickers
-tickers <- c("PLTR", "TSLA", "NVDA", "AAPL", "MSFT", "INTC", "VOW3.DE", "CCJ")
+# Check for tickers passed as command-line arguments
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) > 0) {
+  tickers <- unlist(strsplit(args, ","))
+} else {
+  tickers <- c("PLTR", "TSLA", "NVDA", "AAPL", "MSFT", "INTC", "VOW3.DE", "CCJ")
+}
 
 # Loop through each ticker
 for (s in tickers) {
@@ -136,7 +142,7 @@ for (s in tickers) {
   if (length(result) == 0) {
     cat("No valid results were generated. JSON file will not be created.\n")
   } else {
-    output_file <- paste0("D:\\Git\\StockBot\\public\\", s, ".json")  # Adjusted file path
+    output_file <- paste0("/home/coman/Stockbot/public", s, ".json")  # Adjusted file path
     write_json(result, output_file, pretty = TRUE)
     cat("\nAll result have been saved to:", output_file, "\n")
     result <- NULL
