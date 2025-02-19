@@ -3,6 +3,7 @@ import discord
 import requests
 from dotenv import load_dotenv
 from discord.ext import commands
+from subprocess import run,TimeoutExpired
 
 # Load environment variables from .env file
 load_dotenv()
@@ -41,6 +42,17 @@ def send_message(message, webhook_url):
 @bot.command(name='check')
 async def check(ctx, ticker):
     await ctx.send(f'Checking stock price for {ticker}...')
+    investoBot = "/usr/bin/cat /d/Git/StockBot/public/AAPL.json"
+    try:
+        output = run(f"{investoBot}",capture_output=True, text=True, timeout=10)
+        if output.returncode == 0:
+            await ctx.send(f"Stock price for {ticker} is {output.stdout}")
+        else:
+            await ctx.send(f"Failed to check stock price for {ticker}")
+    except Exception as e:
+        await ctx.send(f"Failed to check stock price for {ticker}: {e}")
+    except TimeoutExpired:
+        await ctx.send(f"Timed out while checking stock price for {ticker}")
 
 @bot.event
 async def on_message(message):
