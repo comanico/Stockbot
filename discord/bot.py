@@ -1,4 +1,5 @@
 import os
+import asyncio
 import discord
 import requests
 from dotenv import load_dotenv
@@ -42,11 +43,15 @@ def send_message(message, webhook_url):
 @bot.command(name='check')
 async def check(ctx, ticker):
     await ctx.send(f'Checking stock price for {ticker}...')
-    investoBot = "/usr/bin/cat /d/Git/StockBot/public/AAPL.json"
+    rscript = r"C:\Program Files\R\R-4.4.2\bin\Rscript.exe"
+    investoBot = r"D:\Git\StockBot\InvestoBot_All_Stocks.R"     
+    command = [rscript, investoBot, ticker]
     try:
-        output = run(f"{investoBot}",capture_output=True, text=True, timeout=10)
-        if output.returncode == 0:
-            await ctx.send(f"Stock price for {ticker} is {output.stdout}")
+        process = await asyncio.create_subprocess_exec(*command, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
+        stdout, stderr = await process.communicate()
+        result = stdout.decode() if stdout else stderr.decode()
+        if result:
+            await ctx.send(f"Stock price for {ticker}: {result}")
         else:
             await ctx.send(f"Failed to check stock price for {ticker}")
     except Exception as e:
